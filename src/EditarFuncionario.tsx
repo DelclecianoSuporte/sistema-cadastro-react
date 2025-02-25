@@ -27,7 +27,17 @@ const EditarFuncionario: React.FC = () => {
     setIdade(funcionario.idade || ""); 
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const houverMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.currentTarget.style.color = '#fff';
+      e.currentTarget.style.backgroundColor = '#007bff';
+    };
+  
+    const retirarMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.currentTarget.style.color = '#007bff';
+      e.currentTarget.style.backgroundColor = 'transparent';
+    };
+
+  const atualizaInformacoes = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (id) {
       const funcionarioAtualizado: Funcionario = {
@@ -39,7 +49,8 @@ const EditarFuncionario: React.FC = () => {
       };
       await atualizaFuncionario(id, funcionarioAtualizado);
       navigate('/');
-    } else {
+    } 
+    else {
       console.error("ID do funcionário não encontrado.");
     }
   };
@@ -47,44 +58,100 @@ const EditarFuncionario: React.FC = () => {
   return (
     <div>
       <h1>Editar Funcionário</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          placeholder="Nome"
-          required
-        />
-        <input
-          type="text"
-          name="cpf"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          placeholder="CPF"
-          required
-        />
-        <input
-          type="text"
-          name="profissao"
-          value={profissao}
-          onChange={(e) => setProfissao(e.target.value)}
-          placeholder="Profissão"
-          required
-        />
-        <input
-          type="number"
-          name="idade"
-          value={idade}
-          onChange={(e) => setIdade(e.target.value)}
-          placeholder="Idade"
-          required
-        />
-        <button type="submit">Salvar</button>
+      <form onSubmit={atualizaInformacoes} style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
+        <label>
+          Nome:
+          <input
+            type="text"
+            name="nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome"
+            required
+            style={{ marginBottom: '5px' }}
+          />
+        </label>
+
+        <label>
+          CPF:
+          <input
+            type="text"
+            name="cpf"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            placeholder="CPF"
+            required
+            style={{ marginBottom: '5px' }}
+          />
+        </label>
+        
+        <label>
+          Profissao:
+          <input
+            type="text"
+            name="profissao"
+            value={profissao}
+            onChange={(e) => setProfissao(e.target.value)}
+            placeholder="Profissão"
+            required
+            style={{ marginBottom: '5px' }}
+          />
+        </label>
+        
+        <label>
+          Idade:
+          <input
+            type="number"
+            name="idade"
+            value={idade}
+            onChange={(e) => setIdade(e.target.value)}
+            placeholder="Idade"
+            required
+            min="0"
+            style={{ marginBottom: '5px' }}
+          />
+        </label>
+      
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+          <button
+            type="submit"
+            style={{
+              alignSelf: 'center',
+              marginTop: '10px',
+              padding: '0.375rem 0.75rem',
+              fontSize: '1rem',
+              color: '#007bff',
+              backgroundColor: 'transparent',
+              border: '1px solid #007bff',
+              borderRadius: '0.25rem',
+              transition: 'color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out'
+            }}
+            onMouseOver={(e) => houverMouse(e)}
+            onMouseOut={(e) => retirarMouse(e)}>
+            Salvar
+          </button>
+          
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            style={{
+              alignSelf: 'center',
+              marginTop: '10px',
+              padding: '0.375rem 0.75rem',
+              fontSize: '1rem',
+              color: '#007bff',
+              backgroundColor: 'transparent',
+              border: '1px solid #007bff',
+              borderRadius: '0.25rem',
+              transition: 'color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out'
+            }}
+            onMouseOver={(e) => houverMouse(e)}
+            onMouseOut={(e) => retirarMouse(e)}>
+            Voltar 
+          </button>
+        </div>
+      
       </form>
-      <div>
-        <button type="button" onClick={() => navigate("/")} style={{ marginTop: "20px" }}>Voltar</button>
-      </div>
     </div>
   );
 };

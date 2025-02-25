@@ -115,11 +115,12 @@ const ListaFuncionarios: React.FC = () => {
             onChange={(e) => setIdade(e.target.value)}
             placeholder="Idade"
             required
-            style={{ marginBottom: '5px' }}
             min="0"
+            style={{ marginBottom: '5px' }}
           />
         </label>
         {/* <button type="submit" style={{ alignSelf: 'center', marginTop: '10px' }}>Cadastrar</button> */}
+        
         <button
           type="submit"
           style={{
@@ -134,10 +135,9 @@ const ListaFuncionarios: React.FC = () => {
             transition: 'color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out'
           }}
           onMouseOver={(e) => houverMouse(e)}
-          onMouseOut={(e) => retirarMouse(e)}
-        >
+          onMouseOut={(e) => retirarMouse(e)}>
           Cadastrar
-      </button>
+       </button>
 
       </form>
     </div>
