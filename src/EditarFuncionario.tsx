@@ -19,12 +19,12 @@ const EditarFuncionario: React.FC = () => {
 
   const carregaFuncionario = async (id: string) => {
     const response = await getFuncionarioPorId(id);
-    console.log("Dados do funcionário carregados:", response.data); // Verifique os dados aqui
+    console.log("Dados do funcionário carregados:", response.data); 
     const funcionario = response.data.data;
-    setNome(funcionario.nome || ""); // Valor padrão vazio
-    setCpf(funcionario.cpf || ""); // Valor padrão vazio
-    setProfissao(funcionario.profissao || ""); // Valor padrão vazio
-    setIdade(funcionario.idade || ""); // Valor padrão vazio
+    setNome(funcionario.nome || ""); 
+    setCpf(funcionario.cpf || ""); 
+    setProfissao(funcionario.profissao || ""); 
+    setIdade(funcionario.idade || ""); 
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
